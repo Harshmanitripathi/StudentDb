@@ -7,10 +7,10 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
 //        Giving Input from User
-        TakingInputFromUser.TakingInput();
+        UserIO.TakingInput();
 
 //       Saving the data in disk
-        FileInputOutput.saveStudentDetailsInFile();
+
 
 
     }

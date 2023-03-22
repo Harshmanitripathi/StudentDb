@@ -2,6 +2,7 @@ package StudentPackage;
 
 import java.util.Queue;
 import java.io.Serializable;
+import java.util.Scanner;
 
 public class Student implements Serializable{
     public int rollNoOfStudent, ageOfStudent;
@@ -9,24 +10,16 @@ public class Student implements Serializable{
     //    boolean courseA, courseB, courseC, courseD, courseE, courseF;
     public String coursesTakenByUser[] = new String[100000];
 
-
-
-    public void setDetails(int rollNoOfStudent, int ageOfStudent, String nameOfStudent, String addressOfStudent, Queue<String> course)
-    {
+    public Student(int rollNoOfStudent, int ageOfStudent, String nameOfStudent, String addressOfStudent, String[] coursesTakenByUser) {
         this.rollNoOfStudent = rollNoOfStudent;
         this.ageOfStudent = ageOfStudent;
         this.nameOfStudent = nameOfStudent;
         this.addressOfStudent = addressOfStudent;
-        int i=0;
-//        converting set to Array
-        while(course.size() > 0){
-            this.coursesTakenByUser[i++] = course.peek();
-            course.remove();
-
-        }
-
-
+        this.coursesTakenByUser = coursesTakenByUser;
     }
+
+
+
 
     public int getRollNoOfStudent() {
         return rollNoOfStudent;
@@ -67,4 +60,42 @@ public class Student implements Serializable{
     public void setCoursesTakenByUser(String[] coursesTakenByUser) {
         this.coursesTakenByUser = coursesTakenByUser;
     }
+
+    public void display(){
+
+        System.out.print(this.getNameOfStudent()+"\t"+this.getRollNoOfStudent()+"\t"+this.getAgeOfStudent()+"\t"+this.getAddressOfStudent()+"\t");
+        for (String course: this.getCoursesTakenByUser()) {
+            if (course == null)break;
+            System.out.print(course+", ");
+        }
+        System.out.println();
+    }
+
+//    public  void studentDeleted( int rollNoToBeDeleted, boolean checkForRollNo) {
+//
+//        while (checkForRollNo == false){
+//
+//
+//
+//                if (this.getRollNoOfStudent() == rollNoToBeDeleted){
+//                    checkForRollNo = true;
+//
+//                    for (int j=i;j<student.length-1;j++){
+//
+//                        student[j] = student[j+1];
+//                    }
+//                    student[student.length-1] = null;
+//                    break;
+//                }
+//
+//            if (checkForRollNo == false)
+//            {
+//
+//                System.out.println("Please enter the valid rollNo");
+//                Scanner sc = new Scanner(System.in);
+//                rollNoToBeDeleted = sc.nextInt();
+//            }
+//        }
+
+//    }
 }
