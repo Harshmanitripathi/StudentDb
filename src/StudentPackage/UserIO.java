@@ -5,9 +5,10 @@ import java.net.BindException;
 import java.util.*;
 import java.util.Comparator;
 public class UserIO {
-
+   static Student[] student;
     public static void TakingInput() throws IOException {
-        
+
+//        Taking Input from user Starts over here
         Scanner sc = new Scanner(System.in);
         String noOfStudents1="";
         System.out.println("Enter the no. of Student to enter the details");
@@ -34,7 +35,7 @@ public class UserIO {
         String addressOfStudent = "", nameOfStudent = "";
         String[] setOfCourses = new String[1000];
 
-        Student[] student = new Student[noOfStudents];
+         student = new Student[noOfStudents];
 
         for (int i = 0; i < noOfStudents; i++) {
             System.out.println("Enter the details of " + i + 1 + " Student");
@@ -167,18 +168,65 @@ public class UserIO {
             student[i]= new Student(rollNo, ageOfStudent, nameOfStudent, addressOfStudent, setOfCourses);
             setOfCourses = new String[setOfCourses.length];
         }
+//       Taking Input Ends Over here
 
+//        Default Sorting based on Age
         Arrays.sort(student, new SortByAge());
 
-        System.out.println("----------------------------------------------------------");
-        System.out.println("Name \t Roll Number \t Age \t Address \t Courses");
-        System.out.println("----------------------------------------------------------");
-        for (int i = 0; i < noOfStudents; i++) {
-            if (student[i] == null)break;
-            student[i].display();
-        }
+//        System.out.println("----------------------------------------------------------");
+//        System.out.println("Name \t Roll Number \t Age \t Address \t Courses");
+//        System.out.println("----------------------------------------------------------");
+//        for (int i = 0; i < noOfStudents; i++) {
+//            if (student[i] == null)break;
+//            student[i].display();
+//        }
 
+//        System.out.println("enter the way you want to sort by age=1, name=2, rollno=3, address=4 etc.");
+//        int sortBy = sc.nextInt();
+//        switch (sortBy) {
+//            case 1:
+//                Arrays.sort(student, new SortByAge());
+//                break;
+//            case 2:
+//                Arrays.sort(student, new SortByName());
+//                break;
+//            case 3:
+//                Arrays.sort(student, new SortByRollNo());
+//                break;
+//            case 4:
+//                Arrays.sort(student, new SortByAddress());
+//        }
+//        System.out.println("----------------------------------------------------------");
+//        System.out.println("Name \t Roll Number \t Age \t Address \t Courses");
+//        System.out.println("----------------------------------------------------------");
+//        for (int i=0;i<noOfStudents;i++){
+//            if (student[i] == null)break;
+//            student[i].display();
+//        }
+
+
+//        String finishDeleting = "";
+//        while (!(finishDeleting.equals("y"))) {
+//            System.out.println("Enter the rollno you want to delete");
+//            int rollNoToBeDeleted = sc.nextInt();
+//            boolean checkForRollNo = false;
+//            DeletingStudents.studentDeleted(student,rollNoToBeDeleted, checkForRollNo);
+//            System.out.println("If you are done deleting type y else type no");
+//            finishDeleting = sc.next();
+//        }
+//        System.out.println("----------------------------------------------------------");
+//        System.out.println("Name \t Roll Number \t Age \t Address \t Courses");
+//        System.out.println("----------------------------------------------------------");
+//        for (int i = 0; i < noOfStudents; i++) {
+//            if (student[i] == null)break;
+//            student[i].display();
+//        }
+        FileInputOutput.saveStudentDetailsInFile(student);
+    }
+
+   static void Sorting(){
         System.out.println("enter the way you want to sort by age=1, name=2, rollno=3, address=4 etc.");
+        Scanner sc = new Scanner(System.in);
         int sortBy = sc.nextInt();
         switch (sortBy) {
             case 1:
@@ -193,15 +241,20 @@ public class UserIO {
             case 4:
                 Arrays.sort(student, new SortByAddress());
         }
+    }
+
+    static void displayDetails(){
         System.out.println("----------------------------------------------------------");
         System.out.println("Name \t Roll Number \t Age \t Address \t Courses");
         System.out.println("----------------------------------------------------------");
-        for (int i=0;i<noOfStudents;i++){
+        for (int i = 0; i < student.length; i++) {
             if (student[i] == null)break;
             student[i].display();
         }
+    }
 
-
+    static void deleteParticularStudent(){
+        Scanner sc = new Scanner(System.in);
         String finishDeleting = "";
         while (!(finishDeleting.equals("y"))) {
             System.out.println("Enter the rollno you want to delete");
@@ -211,17 +264,7 @@ public class UserIO {
             System.out.println("If you are done deleting type y else type no");
             finishDeleting = sc.next();
         }
-        System.out.println("----------------------------------------------------------");
-        System.out.println("Name \t Roll Number \t Age \t Address \t Courses");
-        System.out.println("----------------------------------------------------------");
-        for (int i = 0; i < noOfStudents; i++) {
-            if (student[i] == null)break;
-            student[i].display();
-        }
-        FileInputOutput.saveStudentDetailsInFile(student);
     }
-
-
 
 }
 
