@@ -173,54 +173,7 @@ public class UserIO {
 //        Default Sorting based on Age
         Arrays.sort(student, new SortByAge());
 
-//        System.out.println("----------------------------------------------------------");
-//        System.out.println("Name \t Roll Number \t Age \t Address \t Courses");
-//        System.out.println("----------------------------------------------------------");
-//        for (int i = 0; i < noOfStudents; i++) {
-//            if (student[i] == null)break;
-//            student[i].display();
-//        }
 
-//        System.out.println("enter the way you want to sort by age=1, name=2, rollno=3, address=4 etc.");
-//        int sortBy = sc.nextInt();
-//        switch (sortBy) {
-//            case 1:
-//                Arrays.sort(student, new SortByAge());
-//                break;
-//            case 2:
-//                Arrays.sort(student, new SortByName());
-//                break;
-//            case 3:
-//                Arrays.sort(student, new SortByRollNo());
-//                break;
-//            case 4:
-//                Arrays.sort(student, new SortByAddress());
-//        }
-//        System.out.println("----------------------------------------------------------");
-//        System.out.println("Name \t Roll Number \t Age \t Address \t Courses");
-//        System.out.println("----------------------------------------------------------");
-//        for (int i=0;i<noOfStudents;i++){
-//            if (student[i] == null)break;
-//            student[i].display();
-//        }
-
-
-//        String finishDeleting = "";
-//        while (!(finishDeleting.equals("y"))) {
-//            System.out.println("Enter the rollno you want to delete");
-//            int rollNoToBeDeleted = sc.nextInt();
-//            boolean checkForRollNo = false;
-//            DeletingStudents.studentDeleted(student,rollNoToBeDeleted, checkForRollNo);
-//            System.out.println("If you are done deleting type y else type no");
-//            finishDeleting = sc.next();
-//        }
-//        System.out.println("----------------------------------------------------------");
-//        System.out.println("Name \t Roll Number \t Age \t Address \t Courses");
-//        System.out.println("----------------------------------------------------------");
-//        for (int i = 0; i < noOfStudents; i++) {
-//            if (student[i] == null)break;
-//            student[i].display();
-//        }
         FileInputOutput.saveStudentDetailsInFile(student);
     }
 
