@@ -3,10 +3,11 @@ package StudentPackage;
 import java.io.IOException;
 import java.net.BindException;
 import java.util.*;
+import java.io.*;
 import java.util.Comparator;
 public class UserIO {
    static Student[] student;
-    public static void TakingInput() throws IOException {
+    public static void takeInputFromUser() throws IOException {
 
 //        Taking Input from user Starts over here
         Scanner sc = new Scanner(System.in);
@@ -14,22 +15,13 @@ public class UserIO {
         System.out.println("Enter the no. of Student to enter the details");
 
 //        Validation for Number Of Student
-        while (true) {
-            try {
-                System.out.print("No. of Student: ");
-                noOfStudents1 = sc.next();boolean check=true;
-                for (int i=0;i<noOfStudents1.length();i++) {
-                    if (!(noOfStudents1.charAt(i)>='0' && noOfStudents1.charAt(i)<='9'))
-                        check=false;
-                    if (check == false)
-                        throw new BadDataEnteredException("Number of Student Must be in Digits");
-                }
-            } catch (BadDataEnteredException x) {
-                System.out.println(x.toString());
-                continue;
-            }
-            break;
+        while(true) {
+            System.out.print("No. of Student: ");
+            noOfStudents1 = sc.next();
+            if(Validation.validateUserInputForBadInput(noOfStudents1))
+                break;
         }
+
         int noOfStudents = Integer.parseInt(noOfStudents1);
         String rollNo1 = "", ageOfStudent1 = "";
         String addressOfStudent = "", nameOfStudent = "";
@@ -38,99 +30,59 @@ public class UserIO {
          student = new Student[noOfStudents];
 
         for (int i = 0; i < noOfStudents; i++) {
-            System.out.println("Enter the details of " + i + 1 + " Student");
+            int g=i+1;
+            System.out.println("Enter the details of Student: " + g );
 
 //            Validation for Roll No
-            while (true) {
-                try {
-                    System.out.print("Enter the roll no.: ");
-                    rollNo1 = sc.next();
-                    boolean checkRollno = true;
-                    for (int j = 0; j < rollNo1.length(); j++) {
-                        if (!(rollNo1.charAt(j) >= '0' && rollNo1.charAt(j) <= '9')) {
-                            checkRollno = false;
-                            break;
-                        }
-                    }
-                    if (checkRollno == false)
-                        throw new BadDataEnteredException("Roll No. should be an integer type");
-                    if (Integer.parseInt(rollNo1) > noOfStudents)
-                        throw new BadDataEnteredException("Roll No. of Students can't be greater than Student available");
 
-
-                } catch (BadDataEnteredException x) {
-                    System.out.println(x.toString());
-                    continue;
-                }
-                break;
+            int rollNoIsright=0;
+            while (true){
+                System.out.print("Enter roll no of student:");
+                rollNo1 = sc.next();
+                if(Validation.validateUserInputForBadInput(rollNo1)){
+                    rollNoIsright=1;
+                    break;}
             }
+
+            if (rollNoIsright==0)
+            while(true){
+                System.out.println("Enter the roll no. again");
+                rollNo1 = sc.next();
+                if (Validation.validateUserInputForNotvalidLength(rollNo1,noOfStudents1))
+                    break;
+            }
+
             int rollNo = Integer.parseInt(rollNo1);
-            System.out.println("Enter the age");
+
 
 //            Validation for Age
-            while (true) {
-                try {
-                    System.out.print("Enter the age: ");
-                    ageOfStudent1 = sc.next();
-                    boolean check = true;
-                    for (int j = 0; j < ageOfStudent1.length(); j++) {
-                        if (!(ageOfStudent1.charAt(j) >= '0' && ageOfStudent1.charAt(j) <= '9')) {
-                            check = false;
-                            break;
-                        }
-                    }
-                    if (check == false)
-                        throw new BadDataEnteredException("Age should be an integer type");
-
-
-                } catch (BadDataEnteredException x) {
-                    System.out.println(x.toString());
-                    continue;
-                }
-                break;
+            while (true){
+                System.out.print("Enter age of student:");
+                ageOfStudent1 = sc.next();
+                if(Validation.validateUserInputForBadInput(ageOfStudent1))
+                    break;
             }
+
+
 
             int ageOfStudent = Integer.parseInt(ageOfStudent1);
 
 //            Validation for Name
             while (true) {
-                try {
-                    System.out.print("Enter the name of student: ");
-                    nameOfStudent = sc.next();
-                    if (nameOfStudent.charAt(0) >= '0' && nameOfStudent.charAt(0) <= '9')
-                        throw new BadDataEnteredException("Name should not start with Digit");
-                    if (nameOfStudent.charAt(0) >= 'a' && nameOfStudent.charAt(0) <= 'z')
-                        throw new BadDataEnteredException("Name should not start with Small Alphabets");
-                    int checkForSpace = 0;
-                    for (int j = 0; j < nameOfStudent.length(); j++) {
-                        if (nameOfStudent.charAt(i) == ' ') {
-                            checkForSpace++;
-                            if (nameOfStudent.charAt(i + 1) >= '0' && nameOfStudent.charAt(i + 1) <= '9')
-                                throw new BadDataEnteredException("Any part of Name should not start with Digit");
-                        }
-                    }
-                    if (checkForSpace > 2)
-                        throw new BadDataEnteredException("Name should not be more than 3 words");
-                } catch (BadDataEnteredException x) {
-                    System.out.println(x.toString());
-                    continue;
-                }
-                break;
+                System.out.print("Enter the name of student: ");
+                nameOfStudent = sc.next();
+                if (Validation.validateForName(nameOfStudent, i))
+                    break;
             }
 
 //            Validation for Address
-            while (true) {
-                try {
-                    System.out.print("Enter the address of student: ");
-                    addressOfStudent = sc.next();
-                    if (addressOfStudent.charAt(0) == ',')
-                        throw new BadDataEnteredException("Enter valid Address");
-                } catch (BadDataEnteredException x) {
-                    System.out.println(x.toString());
-                    continue;
-                }
-                break;
+            while (true){
+                System.out.println("Enter address of student");
+                addressOfStudent = sc.next();
+                if (Validation.validateForName(addressOfStudent,i))
+                    break;
             }
+
 
             System.out.println("enter the courses name whom you want to take , enter done when its over");
 
@@ -174,11 +126,40 @@ public class UserIO {
         Arrays.sort(student, new SortByAge());
 
 
-        FileInputOutput.saveStudentDetailsInFile(student);
+//        Using singleton class to store data
+//        serialize the data in singleton class
+        byte[] serialized = FileInputOutputInstance.getInstance().serializeData();
+        FileInputOutputInstance.getInstance().setDataininstringform(student);
+
+//        de-serialize the data in singleton class
+        try {
+            Object[] serializedData = FileInputOutputInstance.getInstance().getDataininstringform();
+            FileInputOutputInstance.getInstance().deserialize(serialized);
+            System.out.println("----------------------------------------------------------");
+            System.out.println("Name \t Roll Number \t Age \t Address \t Courses");
+            System.out.println("----------------------------------------------------------");
+
+            for (int i = 0; i < serializedData.length; i++) {
+                if (serializedData[i] == null)break;
+                System.out.println(serializedData[i].toString());
+            }
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+
+
+
+
+//        FileInputOutput.saveStudentDetailsInFile(student);
     }
 
-   static void Sorting(){
-        System.out.println("enter the way you want to sort by age=1, name=2, rollno=3, address=4 etc.");
+   static void displayWithSortOption(){
+        System.out.println("Enter the way you want to sort as you like ");
+        System.out.println("1. Age");
+        System.out.println("2. Name");
+        System.out.println("3. Roll no");
+        System.out.println("4. Address");
         Scanner sc = new Scanner(System.in);
         int sortBy = sc.nextInt();
         switch (sortBy) {

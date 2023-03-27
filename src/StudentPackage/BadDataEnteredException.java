@@ -2,13 +2,13 @@ package StudentPackage;
 
 public class BadDataEnteredException extends Exception{
 
-    String s;
-     BadDataEnteredException(String s){
-        this.s = s;
+    String errorCameFromEnteringBadData;
+     BadDataEnteredException(String errorCameFromEnteringBadData){
+        this.errorCameFromEnteringBadData = errorCameFromEnteringBadData;
     }
 
     @Override
     public String toString() {
-        return s;
+        return errorCameFromEnteringBadData;
     }
 }
